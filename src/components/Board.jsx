@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import Step from './Step';
+import Completion from './Completion';
 
 export default class Board extends Component {
   renderSteps = () => {
     return [...Array(8).keys()].map(idx => {
-      return <Step key={idx} step={`Step ${idx + 1}`}/>
+      return <Step id={`step-${idx}`} draggable={true} key={idx} step={`Step ${idx + 1}`}/>
     })
   };
 
   renderColumns = () => {
-    return [...Array(5).keys()].map(idx => {
+    const levels = ["Research", "Planning", "In Progress", "In review", "Complete"]
+    return levels.map((level, idx) => {
       return (
         <div className="column">
-          <div className="column-headers" key={idx}>
-            <div>{`Column ${idx + 1}`}</div>
-          </div>
+          <Completion id={`level-${idx}`} key={idx} level={level}/>
         </div>
       )
     })

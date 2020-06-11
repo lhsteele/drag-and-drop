@@ -39,3 +39,11 @@
   height: 50px;
   border: 1px solid pink;
 }
+
+.level-header {
+  height: 50px;
+}
+
+.completion-level {
+  height: 100%;
+}
