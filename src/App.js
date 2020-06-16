@@ -4,25 +4,30 @@ import { connect } from 'react-redux';
 import './App.css';
 import Board from './components/Board';
 
-import { simpleAction } from './actions/simpleAction';
+import configureStore from './store';
+
+import { addStep, updateStep } from './actions/stepAction';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Board />
-        {/* <pre>
-          {JSON.stringify(this.props)}
-        </pre>
-        <button onClick={ev => this.props.simpleAction()}>test redux action</button> */}
       </div>
     );
   }
 }
+const store = configureStore();
 
-const mapStateToProps = state => ({ ...state });
-const mapDispatchToProps = dispatch => ({
-  simpleAction: () => dispatch(simpleAction())
-})
+console.log(store.getState());
+const unsubscribe = store.subscribe(() => console.log(store.getState()));
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+store.dispatch(addStep('Testing step 1'))
+store.dispatch(addStep('Testing step two'))
+store.dispatch(addStep('Testing step THREE'))
+store.dispatch(updateStep(0, 'level 2'))
+store.dispatch(updateStep(1, 'level 4'))
+store.dispatch(updateStep(2, 'level 5'))
+unsubscribe()
+
+export default App;

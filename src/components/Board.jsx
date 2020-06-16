@@ -13,8 +13,8 @@ export default class Board extends Component {
     const levels = ["Research", "Planning", "In Progress", "In review", "Complete"]
     return levels.map((level, idx) => {
       return (
-        <div className="column">
-          <Completion id={`level-${idx}`} key={idx} level={level}/>
+        <div className="column" key={idx}>
+          <Completion id={`level-${idx}`} level={level}/>
         </div>
       )
     })
