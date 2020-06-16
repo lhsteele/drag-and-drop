@@ -4,7 +4,7 @@ const initialState = {
   steps: []
 }
 
-export const stepReducer = (state = initialState, action) => {
+export const steps = (state = initialState, action) => {
   Object.freeze(state);
   switch(action.type) {
     case ADD_STEP:
