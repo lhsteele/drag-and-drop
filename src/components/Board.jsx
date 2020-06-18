@@ -14,7 +14,8 @@ class Board extends Component {
 
 
   renderSteps = () => {
-    if (this.props.steps.steps.length > 0) {
+    const steps = this.props.steps.steps
+    if (steps.length) {
       return this.props.steps.steps.map((step, idx) => {
         return <Step id={`step-${idx}`} draggable={true} key={idx} step={step.text} />
       })
