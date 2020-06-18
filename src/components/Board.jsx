@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Step from './Step';
 import Completion from './Completion';
 import { connect } from 'react-redux';
-import { addStep } from '../actions/stepAction';
+import { addStep, updateStep } from '../actions/stepAction';
 
 class Board extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class Board extends Component {
     this.state = {
       newStep: ''
     }
+    this.levels = ["Research", "Planning", "In Progress", "In review", "Complete"]
   }
 
 
@@ -17,17 +18,20 @@ class Board extends Component {
     const steps = this.props.steps.steps
     if (steps.length) {
       return this.props.steps.steps.map((step, idx) => {
-        return <Step id={`step-${idx}`} draggable={true} key={idx} step={step.text} />
+        return <Step id={idx} draggable={true} key={idx} step={step.text} />
       })
     }
   };
 
+  handleLevelUpdate = (step_id, level) => {
+    this.props.updateStep(step_id, level)
+  };
+
   renderColumns = () => {
-    const levels = ["Research", "Planning", "In Progress", "In review", "Complete"]
-    return levels.map((level, idx) => {
+    return this.levels.map((level, idx) => {
       return (
         <div className="column" key={idx}>
-          <Completion id={`level-${idx}`} level={level}/>
+          <Completion id={idx + 1} level={level} handleLevelUpdate={this.handleLevelUpdate}/>
         </div>
       )
     })
@@ -44,6 +48,7 @@ class Board extends Component {
   }
 
   render() {
+    console.log(this.props.steps)
     return (
       <div className="outer-container">
         <div className="column-steps">
@@ -77,7 +82,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addStep: text => dispatch(addStep(text))
+  addStep: text => dispatch(addStep(text)),
+  updateStep: (stepId, completionLevel) => dispatch(updateStep(stepId, completionLevel))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board)

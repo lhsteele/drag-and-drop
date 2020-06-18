@@ -1,14 +1,17 @@
 import React from 'react'
 
 export default function Completion(props) {
-  const drop = e => {
-    e.preventDefault();
-    const step_id = e.dataTransfer.getData('step_id');
+  const drop = (level) => {
+    return (e) => {
+      e.preventDefault();
+      const step_id = e.dataTransfer.getData('step_id');
 
-    const step = document.getElementById(step_id);
-    step.style.display = 'block';
+      const step = document.getElementById(step_id);
+      step.style.display = 'block';
 
-    e.target.appendChild(step)
+      e.target.appendChild(step)
+      props.handleLevelUpdate(step_id, level);
+    } 
   }
 
   const dragOver = e => {
@@ -16,7 +19,7 @@ export default function Completion(props) {
   }
 
   return (
-    <div className="completion-level" id={props.id} onDrop={drop} onDragOver={dragOver}>
+    <div className="completion-level" id={props.id} onDrop={drop(props.id)} onDragOver={dragOver}>
       <div className="level-header">
         {props.level}
       </div>

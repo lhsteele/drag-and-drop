@@ -13,7 +13,7 @@ export const steps = (state = initialState, action) => {
           ...state.steps,
           {
             text: action.text,
-            completionLevel: 1
+            completionLevel: 0
           }
         ]
       });
