@@ -1,3 +1,3 @@
-Simple exercise using native HTML drag and drop and Redux.
+Simple exercise using native HTML drag/drop and Redux.
 
 ![](Lanes.gif)
