@@ -10,13 +10,13 @@ export default function Step(props) {
   }
 
   const dragOver = e => {
+    e.preventDefault();
     e.stopPropagation();
-
   }
 
 
   return (
-    <div className="step" id={props.id} draggable={props.draggable} onDragStart={dragStart} onDragOver={dragOver}>
+    <div className="step" id={props.id} draggable={props.draggable} onDragStart={dragStart} onDragOver={dragOver} style={{ backgroundColor: props.color }}>
       {props.step}
     </div>
   )

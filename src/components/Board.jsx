@@ -11,6 +11,7 @@ class Board extends Component {
       newStep: ''
     }
     this.levels = ["Research", "Planning", "In Progress", "In review", "Complete"]
+    this.colors = ["#ff7d7e", "#e8ead2", "#af9619", "#ffc833"]
   }
 
 
@@ -18,7 +19,13 @@ class Board extends Component {
     const steps = this.props.steps.steps
     if (steps.length) {
       return this.props.steps.steps.map((step, idx) => {
-        return <Step id={idx} draggable={true} key={idx} step={step.text} />
+        return <Step 
+                  id={idx} 
+                  draggable={true} 
+                  key={idx} 
+                  step={step.text} 
+                  color={this.colors[idx % this.colors.length]}
+                />
       })
     }
   };
@@ -51,14 +58,16 @@ class Board extends Component {
     console.log(this.props.steps)
     return (
       <div className="outer-container">
-        <div className="column-steps">
-          {this.renderSteps()}
-        </div>
-        <div className="column-group">
-          {this.renderColumns()}
+        <div className="step-col-container">
+          <div className="column-steps">
+            {this.renderSteps()}
+          </div>
+          <div className="column-group">
+            {this.renderColumns()}
+          </div>
         </div>
         <div className="add-step-container">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="add-step">
             <input 
               type="text"
               value={this.state.newStep}
@@ -67,7 +76,7 @@ class Board extends Component {
             />
             <input 
               type="submit"
-              value="Add new step"
+              value="Add step"
               className="add-step-button"
             />
           </form>
