@@ -10,7 +10,7 @@ class Board extends Component {
     this.state = {
       newStep: ''
     }
-    this.levels = ["Research", "Planning", "In Progress", "In review", "Complete"]
+    this.levels = ["Research", "Planning", "In Progress", "Complete"]
     this.colors = ["#ff7d7e", "#e8ead2", "#af9619", "#ffc833"]
   }
 
@@ -38,7 +38,7 @@ class Board extends Component {
     return this.levels.map((level, idx) => {
       return (
         <div className="column" key={idx}>
-          <Completion id={idx + 1} level={level} handleLevelUpdate={this.handleLevelUpdate}/>
+          <Completion id={level} level={level} handleLevelUpdate={this.handleLevelUpdate}/>
         </div>
       )
     })

@@ -8,7 +8,7 @@ export default function Completion(props) {
       const step_id = e.dataTransfer.getData('step_id');
       const step = document.getElementById(step_id);
       if (step_id) {
-        step.style.display = 'block';
+        step.style.display = 'flex';
       } else {
         console.log('returning')
         return
